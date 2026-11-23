@@ -1,26 +1,561 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@config '../../tailwind.config.ts';
 
+@import 'tw-animate-css';
+/*@import 'shadcn/tailwind.css'; */
+
+@custom-variant dark (&:is(.dark *));
+
+/* start design tokens from figma */
+@theme {
+  /* Font family */
+
+  /* Text Sizes and Line Heights */
+  --text-display-3xl: 3.75rem;
+  --text-display-3xl--line-height: 4.5rem;
+
+  --text-display-2xl: 3rem;
+  --text-display-2xl--line-height: 3.75rem;
+  --text-display-2xl--letter-spacing: -0.02em;
+
+  --text-display-xl: 2.5rem;
+  --text-display-xl--line-height: 3rem;
+  --text-display-xl--letter-spacing: -0.02em;
+
+  --text-display-lg: 2.25rem;
+  --text-display-lg--line-height: 2.75rem;
+  --text-display-lg--letter-spacing: -0.02em;
+
+  --text-display-md: 2rem;
+  --text-display-md--line-height: 2.5rem;
+
+  --text-display-sm: 1.75rem;
+  --text-display-sm--line-height: 2.375rem;
+
+  --text-display-xs: 1.5rem;
+  --text-display-xs--line-height: 2.25rem;
+
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 2.125rem;
+
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 2rem;
+
+  --text-md: 1rem;
+  --text-md--line-height: 1.875rem;
+
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.75rem;
+
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.5rem;
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Color Theme */
+  --color-neutral-25: #fdfdfd;
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f5f5f5;
+  --color-neutral-200: #e9eaeb;
+  --color-neutral-300: #d5d7da;
+  --color-neutral-400: #a4a7ae;
+  --color-neutral-500: #717680;
+  --color-neutral-600: #535862;
+  --color-neutral-700: #414651;
+  --color-neutral-800: #252b37;
+  --color-neutral-900: #181d27;
+  --color-neutral-950: #0a0d12;
+
+  --color-primary-100: #f6f9fe;
+  --color-primary-200: #7f51f9;
+  --color-primary-300: #6936f2;
+
+  --color-accent-red: #d9206e;
+  --color-accent-green: #079455;
+  --color-accent-yellow: #fdb022;
+
+  --color-base-white: #ffffff;
+  --color-base-black: #000000;
+
+  /* Radius */
+  --radius-none: 0rem;
+  --radius-xxs: 0.125rem;
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.25rem;
+  --radius-4xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --spacing-xxs: 0.125rem;
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.375rem;
+  --spacing-md: 0.5rem;
+  --spacing-lg: 0.75rem;
+  --spacing-xl: 1rem;
+  --spacing-2xl: 1.25rem;
+  --spacing-3xl: 1.5rem;
+  --spacing-4xl: 2rem;
+  --spacing-5xl: 2.5rem;
+  --spacing-6xl: 3rem;
+  --spacing-7xl: 4rem;
+  --spacing-8xl: 5rem;
+  --spacing-9xl: 6rem;
+  --spacing-10xl: 8rem;
+  --spacing-11xl: 8.75rem;
+
+  /* Letter spacing tambahan */
+  --tracking-minus-1: -0.01em;
+  --tracking-minus-2: -0.02em;
+  --tracking-minus-3: -0.03em;
+
+  /* ---------- Shadows ---------- */
+  --shadow-xs: 0px 1px 2px rgba(10, 13, 18, 0.05);
+  --shadow-lg:
+    0px 12px 16px -4px rgba(10, 13, 18, 0.08),
+    0px 4px 6px -2px rgba(10, 13, 18, 0.03),
+    0px 2px 2px -1px rgba(10, 13, 18, 0.04);
+  --shadow-focus-ring: 0px 0px 0px 2px #0c0d0d, 0px 0px 0px 4px #9e77ed;
+
+  /* ---------- Gradient background halaman Login/Register ---------- */
+  --gradient-auth-1: linear-gradient(270deg, #5613a3 38.99%, #522bc8 77.96%);
+  --gradient-auth-2: linear-gradient(230.59deg, #ac88ff 33.13%, #ad3ae7 63.19%);
+}
+
+/* ---------------------------------------- */
+/* shadcn theme */
+/* ---------------------------------------- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+
+  /* SF Pro (Figma) on Apple devices; Inter (self-hosted) everywhere else. */
+  --font-sfpro-stack:
+    "SF Pro Display", "SF Pro Text", -apple-system, BlinkMacSystemFont, "Inter Variable", "Segoe UI",
+    Roboto, sans-serif;
+
+  --background: #000000; /* base-black */
+  --foreground: #fdfdfd; /* neutral-25 */
+
+  --card: #000000; /* base-black */
+  --card-foreground: #fdfdfd;
+  --popover: #0a0d12; /* neutral-950 */
+  --popover-foreground: #fdfdfd;
+
+  --primary: #6936f2; /* primary-300 */
+  --primary-foreground: #fdfdfd;
+  --secondary: #181d27; /* neutral-900 */
+  --secondary-foreground: #fdfdfd;
+
+  --muted: #0a0d12; /* neutral-950 (bg input, search) */
+  --muted-foreground: #a4a7ae; /* neutral-400 (timestamp, deskripsi) */
+  --accent: #181d27; /* neutral-900 (hover) */
+  --accent-foreground: #fdfdfd;
+
+  --destructive: #b41759; /* accent-red */
+  --border: #181d27; /* neutral-900 (dipakai di hampir semua border) */
+  --input: #181d27; /* neutral-900 */
+  --ring: #9e77ed; /* ring fokus checkbox di Figma */
+
+  --chart-1: #6936f2;
+  --chart-2: #7f51f9;
+  --chart-3: #f6f9fe;
+  --chart-4: #079455;
+  --chart-5: #fdb022;
+
+  --radius: 0.75rem; /* 12px, radius input */
+
+  --sidebar: #0a0d12;
+  --sidebar-foreground: #fdfdfd;
+  --sidebar-primary: #6936f2;
+  --sidebar-primary-foreground: #fdfdfd;
+  --sidebar-accent: #181d27;
+  --sidebar-accent-foreground: #fdfdfd;
+  --sidebar-border: #181d27;
+  --sidebar-ring: #9e77ed;
 }
 
 @theme inline {
+  --font-sans: var(--font-sfpro-stack);
+  --font-heading: var(--font-sfpro-stack);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ---------------------------------------- */
+/* end of shadcn theme */
+/* ---------------------------------------- */
+
+/* .dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.87 0 0);
+  --chart-2: oklch(0.556 0 0);
+  --chart-3: oklch(0.439 0 0);
+  --chart-4: oklch(0.371 0 0);
+  --chart-5: oklch(0.269 0 0);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+} */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground text-md font-regular;
+  }
+  html {
+    @apply font-sans;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* =========================================================
+   Components & Variant
+   Mobile-first: nilai dasar = varian Mobile, md: = varian Desktop.
+   ========================================================= */
+@layer components {
+  /* ---------- Header (Before/After Login, Mobile, Search) ---------- */
+  .header {
+    @apply flex h-16 items-center justify-between gap-xl border-b border-neutral-900 bg-base-black px-xl md:h-20 md:px-[120px];
+  }
+  .header-logo {
+    @apply flex items-center gap-md text-display-xs font-bold text-neutral-25;
+  }
+  .header-user {
+    @apply flex items-center gap-lg text-md font-bold text-neutral-25;
+  }
+
+  /* ---------- Search (Property 1=Off / On) ---------- */
+  .search {
+    @apply flex h-12 w-full items-center gap-sm rounded-full border border-neutral-900 bg-neutral-950 px-xl py-md text-sm text-neutral-25 placeholder:text-neutral-600;
+  }
+  .search-icon {
+    @apply size-5 shrink-0 text-neutral-500;
+  }
+
+  /* ---------- Button (Primary / Secondary, Desktop / Mobile) ---------- */
+  .btn,
+  .btn-primary,
+  .btn-secondary {
+    @apply inline-flex h-10 items-center justify-center gap-md rounded-full p-md text-sm font-bold tracking-minus-1 text-neutral-25 md:h-12 md:text-md md:tracking-minus-2;
+  }
+  .btn-primary {
+    @apply bg-primary-300;
+  }
+  .btn-secondary {
+    @apply border border-neutral-900 bg-transparent;
+  }
+  /* Follow / Following di List Liked */
+  .btn-follow {
+    @apply inline-flex h-10 items-center justify-center gap-md rounded-full bg-primary-300 px-3xl py-md text-sm font-bold tracking-minus-1 text-neutral-25;
+  }
+  .btn-following {
+    @apply inline-flex h-10 items-center justify-center gap-md rounded-full border border-neutral-900 px-xl py-md text-sm font-bold tracking-minus-1 text-neutral-25;
+  }
+  /* Tombol ikon bulat (share di profil) */
+  .btn-icon {
+    @apply inline-flex size-12 items-center justify-center rounded-full border border-neutral-900 p-md text-neutral-25;
+  }
+
+  /* ---------- Input Field & Textarea ---------- */
+  .field {
+    @apply flex flex-col gap-xxs;
+  }
+  .field-label {
+    @apply text-sm font-bold text-neutral-25;
+  }
+  .field-control {
+    @apply flex h-12 w-full items-center gap-md rounded-xl border border-neutral-900 bg-neutral-950 px-xl py-md text-md font-semibold text-neutral-25 outline-none placeholder:font-regular placeholder:text-neutral-600;
+  }
+  textarea.field-control {
+    @apply h-auto min-h-[101px] resize-none items-start;
+  }
+  .field-control[aria-invalid='true'],
+  .field-control.is-error {
+    @apply border-accent-red;
+  }
+  /* Disabled input di Figma memakai versi terang */
+  input.field-control:disabled {
+    @apply cursor-not-allowed border-neutral-300 bg-neutral-100 text-neutral-950;
+  }
+  textarea.field-control:disabled {
+    @apply cursor-not-allowed;
+  }
+  .field-error {
+    @apply text-sm font-medium tracking-minus-3 text-accent-red;
+  }
+
+  /* ---------- File Upload (Default / Error / Fill) ---------- */
+  .file-upload {
+    @apply flex flex-col items-center gap-xs rounded-xl border border-dashed border-neutral-900 bg-neutral-950 px-3xl py-xl text-center;
+  }
+  .file-upload.is-error {
+    @apply border-accent-red;
+  }
+  .file-upload-icon {
+    @apply flex size-10 items-center justify-center rounded-md border border-neutral-900 text-neutral-25;
+  }
+  .file-upload-link {
+    @apply text-sm font-semibold text-primary-200;
+  }
+  .file-upload-hint {
+    @apply text-sm font-semibold text-neutral-600;
+  }
+  /* Tombol "Change Image" / "Delete Image" */
+  .file-action {
+    @apply inline-flex h-10 items-center gap-sm rounded-lg border border-neutral-900 bg-neutral-900 px-lg text-sm font-medium tracking-minus-3 text-neutral-25;
+  }
+  .file-action.is-danger {
+    @apply text-accent-red;
+  }
+
+  /* ---------- Tab (On / Off, Desktop / Mobile) ---------- */
+  .tab {
+    @apply flex h-12 flex-1 items-center justify-center gap-md border-b border-neutral-900 px-3xl text-sm font-medium tracking-normal text-neutral-400 md:gap-lg md:text-md;
+  }
+  .tab[data-state='active'],
+  .tab.is-active {
+    @apply border-b-2 border-neutral-25 font-bold tracking-minus-1 text-neutral-25 md:tracking-minus-2;
+  }
+
+  /* ---------- User Info / List Liked / Comment ---------- */
+  .user-info {
+    @apply flex items-center gap-md;
+  }
+  .user-name {
+    @apply text-sm font-bold tracking-minus-1 text-neutral-25;
+  }
+  .user-meta {
+    @apply text-sm text-neutral-400;
+  }
+  .avatar {
+    @apply shrink-0 rounded-full object-cover;
+  }
+  .comment-item {
+    @apply flex flex-col gap-md md:gap-[10px];
+  }
+  .comment-time {
+    @apply text-xs/4 text-neutral-400;
+  }
+  .comment-text {
+    @apply text-xs text-neutral-25 md:text-sm;
+  }
+
+  /* ---------- Card Post (Desktop / Mobile) ---------- */
+  .post-card {
+    @apply flex flex-col gap-md md:gap-lg;
+  }
+  .post-header {
+    @apply flex items-center gap-md md:gap-lg;
+  }
+  .post-username {
+    @apply text-sm font-bold tracking-minus-1 text-neutral-25 md:text-md md:tracking-minus-2;
+  }
+  .post-time {
+    @apply text-xs/4 text-neutral-400 md:text-sm;
+  }
+  .post-image {
+    @apply aspect-square w-full rounded-sm object-cover;
+  }
+  .post-actions {
+    @apply flex items-center gap-lg md:gap-xl;
+  }
+  .post-action {
+    @apply flex items-center gap-sm text-sm font-semibold text-neutral-25 md:text-md;
+  }
+  .post-text {
+    @apply text-sm text-neutral-25 md:text-md;
+  }
+  .post-more {
+    @apply text-sm font-bold tracking-minus-1 text-primary-200 md:text-md md:font-semibold md:tracking-minus-2;
+  }
+
+  /* ---------- Alert (Success / Danger) ---------- */
+  .alert,
+  .alert-success,
+  .alert-danger {
+    @apply flex items-center gap-md rounded-md px-lg py-md text-sm font-semibold text-base-white;
+  }
+  .alert-success {
+    @apply bg-accent-green;
+  }
+  .alert-danger {
+    @apply bg-accent-red;
+  }
+
+  /* ---------- Checkbox & Radio ---------- */
+  .checkbox,
+  .radio {
+    @apply size-4 shrink-0 appearance-none border border-neutral-800 bg-transparent;
+  }
+  .checkbox {
+    @apply rounded-xs;
+  }
+  .radio {
+    @apply rounded-full;
+  }
+  .checkbox:checked,
+  .checkbox[data-state='checked'],
+  .checkbox[data-state='indeterminate'],
+  .radio:checked,
+  .radio[data-state='checked'] {
+    @apply border-transparent bg-primary-200;
+  }
+  .checkbox:focus-visible,
+  .radio:focus-visible {
+    @apply shadow-focus-ring;
+  }
+  .checkbox:disabled,
+  .radio:disabled {
+    @apply border-neutral-600 bg-neutral-600;
+  }
+  .checkbox.is-md {
+    @apply size-5 rounded-sm;
+  }
+  .radio.is-md {
+    @apply size-5;
+  }
+
+  /* ---------- Menu bawah melayang (Desktop / Mobile) ---------- */
+  .bottom-menu {
+    @apply flex h-16 items-center justify-center gap-[45px] rounded-full border border-neutral-900 bg-neutral-950 backdrop-blur-[50px] md:h-20;
+  }
+  .bottom-menu-item {
+    @apply flex w-[94px] flex-col items-center gap-xxs text-xs/4 text-neutral-25 md:gap-xs md:text-md;
+  }
+  .bottom-menu-item[data-state='active'],
+  .bottom-menu-item.is-active {
+    @apply text-xs font-bold text-primary-200 md:text-md md:text-neutral-25;
+  }
+  .bottom-menu-add {
+    @apply flex size-11 items-center justify-center rounded-full bg-primary-300 text-neutral-25 md:size-12;
+  }
+
+  /* ---------- Overlay (modal) ---------- */
+  .overlay {
+    @apply fixed inset-0 bg-neutral-950/80;
+  }
+
+  /* ---------- Halaman Login / Register ---------- */
+  .auth-backdrop {
+    @apply relative isolate min-h-screen overflow-hidden bg-base-black;
+  }
+  .auth-backdrop::before,
+  .auth-backdrop::after {
+    content: '';
+    @apply pointer-events-none absolute -z-10 rounded-full blur-[150px];
+  }
+  .auth-backdrop::before {
+    @apply -bottom-1/2 -left-1/4 h-[120%] w-[90%];
+    background: var(--gradient-auth-1);
+  }
+  .auth-backdrop::after {
+    @apply -right-1/4 -bottom-1/2 h-[110%] w-[80%] rotate-45;
+    background: var(--gradient-auth-2);
+  }
+  .auth-card {
+    @apply flex w-full max-w-[446px] flex-col items-center gap-3xl rounded-2xl border border-neutral-900 bg-base-black/20 px-3xl py-5xl backdrop-blur-[20px];
+  }
+  .auth-title {
+    @apply text-display-xs font-bold text-neutral-25;
+  }
+  .auth-prompt {
+    @apply text-md font-semibold text-neutral-25;
+  }
+  .auth-link {
+    @apply text-md font-bold text-primary-200;
+  }
+
+  /* ---------- Profil ---------- */
+  .profile-stats {
+    @apply flex items-center gap-3xl;
+  }
+  .profile-stat {
+    @apply flex flex-1 flex-col items-center gap-xxs border-r border-neutral-900 text-center last:border-r-0;
+  }
+  .profile-stat-value {
+    @apply text-lg font-bold tracking-minus-3 text-neutral-25 md:text-xl md:tracking-minus-2;
+  }
+  .profile-stat-label {
+    @apply text-xs text-neutral-400 md:text-md;
+  }
+  .gallery-grid {
+    @apply grid grid-cols-3 gap-xs;
+  }
+  .gallery-item {
+    @apply aspect-square w-full rounded-sm object-cover;
+  }
+
+  /* ---------- Empty state ("Your story starts here") ---------- */
+  .empty-state {
+    @apply flex flex-col items-center gap-3xl text-center;
+  }
+  .empty-state-title {
+    @apply text-lg font-bold tracking-minus-3 text-neutral-25;
+  }
+  .empty-state-text {
+    @apply text-md text-neutral-400;
+  }
 }
+
+/* end design tokens from figma */
