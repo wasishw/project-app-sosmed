@@ -2,6 +2,7 @@
 
 A social media app (timeline, posts, likes, comments, follow, saved posts, profiles, user search) built with **Next.js App Router** from the _Figma-Sosmed_ design, using the real REST API:
 
+- Design Figma: [Social Media](https://www.figma.com/design/5qL4zS8bo8geBn2aJfa239/Social-Media?node-id=41411-8567&t=p7mkZRAGjqHS5LkX-1)
 - API base URL: `https://be-social-media-api-production.up.railway.app`
 - Swagger: `https://be-social-media-api-production.up.railway.app/api-swagger/`
 
