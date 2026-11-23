@@ -2,6 +2,7 @@
 
 import {
   infiniteQueryOptions,
+  type QueryClient,
   queryOptions,
   useInfiniteQuery,
   useMutation,
@@ -11,11 +12,13 @@ import {
 
 import { postsApi } from "@/lib/api/posts";
 import { useAuthStatus } from "@/store/use-auth-status";
+import type { Post } from "@/types/post";
 import type { CreatePostInput } from "@/types/post";
 
 import { queryKeys } from "./keys";
 import { nextPage, PAGE_SIZE } from "./pagination";
 import { restoreSnapshot, snapshotPostCaches, updatePostInCache } from "./post-cache";
+import { meQueries } from "./use-me";
 
 export const postQueries = {
   timeline: (mode: "feed" | "explore") =>
@@ -56,8 +59,40 @@ export function useTimeline() {
   return { query: status === "guest" || feedIsEmpty ? explore : feed, isResolvingAuth: false };
 }
 
+/**
+ * GET /api/posts/{id} always answers `likedByMe: false`, even for a post the
+ * signed-in user liked (the list endpoints get it right). So for a signed-in
+ * user the flag is derived from the post's likers list instead.
+ */
+/** Largest page size GET /api/posts/{id}/likes accepts. */
+const LIKERS_LIMIT = 50;
+
+async function withLikedByMe(qc: QueryClient, post: Post): Promise<Post> {
+  if (post.likedByMe || post.likeCount === 0) return post;
+  try {
+    const [me, likers] = await Promise.all([
+      qc.fetchQuery(meQueries.profile()),
+      postsApi.likes(post.id, { page: 1, limit: LIKERS_LIMIT }),
+    ]);
+    return { ...post, likedByMe: likers.users.some((user) => user.id === me.id) };
+  } catch {
+    // Not worth failing the whole detail view over the heart icon.
+    return post;
+  }
+}
+
 export function usePost(id: number) {
-  return useQuery(postQueries.detail(id));
+  const qc = useQueryClient();
+  const status = useAuthStatus();
+  return useQuery({
+    ...postQueries.detail(id),
+    queryFn: async () => {
+      const post = await postsApi.detail(id);
+      return status === "authenticated" ? withLikedByMe(qc, post) : post;
+    },
+    // Wait for the token so the first fetch already knows who "me" is.
+    enabled: status !== "loading",
+  });
 }
 
 export function usePostLikes(id: number, enabled: boolean) {
