@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><g transform="translate(-1949 -2564)"><mask id="mask7_8411_155711" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="1950" y="2565" width="22" height="22">
+<path d="M1961 2586C1966.52 2586 1971 2581.52 1971 2576C1971 2570.48 1966.52 2566 1961 2566C1955.48 2566 1951 2570.48 1951 2576C1951 2581.52 1955.48 2586 1961 2586Z" fill="white" stroke-width="2" stroke-linejoin="round" stroke="white"/>
+<path d="M1963.83 2573.17L1958.17 2578.83M1958.17 2573.17L1963.83 2578.83" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="black"/>
+</mask>
+<g mask="url(#mask7_8411_155711)">
+<path d="M1949 2564H1973V2588H1949V2564Z" fill="currentColor"/>
+</g>
+</g></svg>
